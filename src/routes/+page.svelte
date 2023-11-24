@@ -1,7 +1,4 @@
-<script>
-	import Counter from "./Counter.svelte";
-	import welcome from "$lib/images/svelte-welcome.webp";
-	import welcome_fallback from "$lib/images/svelte-welcome.png";
+<script lang="ts">
 </script>
 
 <svelte:head>
@@ -9,17 +6,23 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<h1>
-		to your new<br />SvelteKit app
-	</h1>
+<body>
+	<nav class="nav">
+		<div class="brand">BRAND</div>
+		<a href="/login"><button>登入</button></a>
+	</nav>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
+	<main>
+		<div class="container">
+			<h1>Home</h1>
+			<p>Welcome home!</p>
+		</div>
+	</main>
+</body>
 
 <style>
+	nav {
+		display: flex;
+		justify-content: space-between;
+	}
 </style>
