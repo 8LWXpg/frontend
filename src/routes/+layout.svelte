@@ -4,11 +4,11 @@
 
 <svelte:head></svelte:head>
 
-<body class="container">
-    <nav class="nav">
+<body>
+    <nav>
         <div>COOL TITLE</div>
         {#if $page.route.id === "/login"}
-            <a class="button" href="/login/register">註冊</a>
+            <a class="button" href="/">首頁</a>
         {:else}
             <a class="button" href="/login">登入</a>
         {/if}
