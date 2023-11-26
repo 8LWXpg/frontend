@@ -6,7 +6,7 @@
 
 <body>
     <nav>
-        <div>COOL TITLE</div>
+        <div>Network management system</div>
         {#if $page.route.id === "/login"}
             <a class="button" href="/">首頁</a>
         {:else}
