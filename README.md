@@ -39,4 +39,4 @@ You can preview the production build with `npm run preview`.
 
 ## Deploying
 
-![doc](https://kit.svelte.dev/docs/adapter-node)
+[doc](https://kit.svelte.dev/docs/adapter-node)
