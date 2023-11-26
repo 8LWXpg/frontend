@@ -8,7 +8,7 @@
     <nav>
         <div>Network management system</div>
         {#if $page.route.id === "/login"}
-            <a class="button" href="/">首頁</a>
+            <a class="button" href="/login/register">註冊</a>
         {:else}
             <a class="button" href="/login">登入</a>
         {/if}
