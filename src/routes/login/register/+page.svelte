@@ -20,7 +20,7 @@
             name="email"
             autocomplete="email"
             required
-            placeholder="EMAIL"
+            placeholder="example@gmail.com"
             bind:value={input.email}
         />
         <br />
@@ -33,6 +33,6 @@
             bind:value={input.password}
         />
         <br />
-        <button class="button" style="width: 100%">註冊</button>
+        <a href="/login" class="button" style="width: 100%">註冊</a>
     </form>
 </Center>

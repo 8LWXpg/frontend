@@ -23,6 +23,6 @@
             placeholder="密碼"
             bind:value={input.password}
         />
-        <button class="button" style="width: 100%">登入</button>
+        <a href="/" class="button" style="width: 100%">登入</a>
     </form>
 </Center>
