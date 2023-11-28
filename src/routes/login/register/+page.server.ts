@@ -7,6 +7,6 @@ export const load = (async () => {
 export const actions = {
     register: async ({ cookies, request }) => {
         const input = await request.formData();
-        console.log('username is :', input.get('username'));
+        console.log(input.get('username'), input.get('password'), input.get('email'));
     },
 };
