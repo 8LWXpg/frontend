@@ -10,27 +10,27 @@ export const load = (async () => {
 export const actions = {
     register: async ({ cookies, request }) => {
         const input = await request.formData();
-        fetch(`${apiurl}/register`, {
+        const response = fetch(`${apiurl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(formDataToJson(input)),
-        }).then((response) => {
-            switch (response.status) {
-                case 201:
-                    console.log(response.statusText);
-                    break;
-                case 400:
-                    console.log(response.statusText);
-                    break;
-                case 500:
-                    console.log(response.statusText);
-                    break;
-                default:
-                    console.log(`uncaught response ${response}`);
-                    break;
-            }
         });
+        const body = await response.then((res) => res.json());
+        switch ((await response).status) {
+            case 201:
+                console.log(body);
+                break;
+            case 400:
+                console.log(body);
+                break;
+            case 500:
+                console.log(body);
+                break;
+            default:
+                console.log(`uncaught response ${(await response)}`);
+                break;
+        }
     },
 }
