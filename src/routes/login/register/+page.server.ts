@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { formDataToJson } from '$lib/common';
-
-const apiurl = "http://localhost:8080";
+import { BACKEND } from '$env/static/private';
 
 export const load = (async () => {
     return {};
@@ -10,7 +9,7 @@ export const load = (async () => {
 export const actions = {
     register: async ({ cookies, request }) => {
         const input = await request.formData();
-        const response = fetch(`${apiurl}/login`, {
+        const response = fetch(`${BACKEND}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

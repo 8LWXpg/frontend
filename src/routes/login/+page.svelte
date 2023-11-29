@@ -1,10 +1,7 @@
 <script lang="ts">
     import Center from "$lib/Center.svelte";
     import { goto } from "$app/navigation";
-
-    const handleRegister = () => {
-        goto("/");
-    };
+    import { toast } from "@zerodevx/svelte-toast";
 </script>
 
 <Center>
@@ -25,8 +22,6 @@
             required
             placeholder="密碼"
         /><br />
-        <button class="button" style="width: 100%" on:click={handleRegister}
-            >登入</button
-        >
+        <button class="button" style="width: 100%"> 登入 </button>
     </form>
 </Center>

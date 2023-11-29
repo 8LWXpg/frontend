@@ -1,8 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { formDataToJson } from '$lib/common';
 import { redirect } from '@sveltejs/kit';
-
-const apiurl = "http://localhost:8080";
+import { BACKEND } from '$env/static/private';
 
 export async function load({ cookies }) {
     // TODO: check if user is logged in
@@ -11,7 +10,8 @@ export async function load({ cookies }) {
 export const actions = {
     login: async ({ cookies, request }) => {
         const input = await request.formData();
-        const response = fetch(`${apiurl}/login`, {
+        console.log(BACKEND);
+        const response = fetch(`${BACKEND}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,6 +22,8 @@ export const actions = {
         switch ((await response).status) {
             case 200:
                 console.log(body);
+                // @ts-ignore
+                cookies.set("session", input.get("username"), { path: "/", maxAge: 60 * 60 * 24 * 7 });
                 throw redirect(303, "/");
             case 400:
                 console.log(body);
