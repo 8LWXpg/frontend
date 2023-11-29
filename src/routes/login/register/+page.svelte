@@ -1,19 +1,17 @@
 <script lang="ts">
     import Center from "$lib/Center.svelte";
-    export let input = { username: "", email: "", password: "" };
 </script>
 
 <Center>
     <br />
     <h1>註冊</h1>
-    <form action="?/register">
+    <form method="post" action="?/register">
         <input
             type="text"
             name="username"
             autocomplete="username"
             required
             placeholder="使用者名稱"
-            bind:value={input.username}
         /><br />
         <input
             type="email"
@@ -21,20 +19,17 @@
             autocomplete="email"
             required
             placeholder="example@gmail.com"
-            bind:value={input.email}
-        />
-        <br />
+        /><br />
         <input
             type="password"
             name="password"
             autocomplete="new-password"
             required
             placeholder="密碼"
-            bind:value={input.password}
         />
         <br />
-        <a href="/login">
-            <button class="button" style="width: 100%">註冊</button>
-        </a>
+        <!-- <a href="/login"> -->
+        <button class="button" style="width: 100%">註冊</button>
+        <!-- </a> -->
     </form>
 </Center>
