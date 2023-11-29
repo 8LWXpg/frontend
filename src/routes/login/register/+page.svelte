@@ -6,7 +6,7 @@
 <Center>
     <br />
     <h1>註冊</h1>
-    <form method="POST" action="?/register">
+    <form action="?/register">
         <input
             type="text"
             name="username"
@@ -33,6 +33,8 @@
             bind:value={input.password}
         />
         <br />
-        <a href="/login" class="button" style="width: 100%">註冊</a>
+        <a href="/login">
+            <button class="button" style="width: 100%">註冊</button>
+        </a>
     </form>
 </Center>

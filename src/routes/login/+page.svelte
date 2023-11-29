@@ -1,6 +1,11 @@
 <script lang="ts">
     import Center from "$lib/Center.svelte";
+    import { goto } from "$app/navigation";
     export let input = { username: "", password: "" };
+
+    const handleRegister = () => {
+        goto("/");
+    };
 </script>
 
 <Center>
@@ -23,6 +28,9 @@
             placeholder="密碼"
             bind:value={input.password}
         />
-        <a href="/" class="button" style="width: 100%">登入</a>
+        <br />
+        <button class="button" style="width: 100%" on:click={handleRegister}
+            >登入</button
+        >
     </form>
 </Center>
