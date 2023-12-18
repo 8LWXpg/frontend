@@ -95,7 +95,7 @@ async function getTrigger(): Promise<boolean> {
         body: JSON.stringify(data),
     });
     const body = await response.then((res) => res.json());
-    return settings.cpu < Number(body.result[0].value)
+    return Number(body.result[0].value) > settings.cpu;
 }
 
 timeOut();
