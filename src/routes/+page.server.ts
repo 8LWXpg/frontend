@@ -12,12 +12,13 @@ let settings = {
     mem: 0,
     bw: 0,
     dly: 0,
+    interval: 10000
 };
 
 async function timeOut() {
     setTimeout(async () => {
         cpuWarning = await getTrigger();
-    }, 10000);
+    }, settings.interval);
 }
 
 export function load({ cookies }) {
@@ -34,6 +35,7 @@ export const actions = {
         settings.mem = Number(data.get('mem'));
         settings.bw = Number(data.get('bw'));
         settings.dly = Number(data.get('dly'));
+        settings.interval = Number(data.get('interval'));
         console.log(settings);
         if (await getTrigger()) {
             console.log("CPU is Not OK");
