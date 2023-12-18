@@ -1,78 +1,70 @@
 <script lang="ts">
-	// @ts-ignore
-	import Plot from "svelte-plotly.js";
-	import { onMount } from "svelte";
-	const max = 100;
-	let dataSets = [
-		[
-			{
-				x: [new Date()],
-				y: [0],
-				type: "scatter",
-			},
-		],
-	];
+	let showModal = false;
 
-	function addPlot() {
-		dataSets.push([
-			{
-				x: [new Date()],
-				y: [0],
-				type: "scatter",
-			},
-		]);
+	function toggleModal() {
+		showModal = !showModal;
 	}
-
-	function minusPlot() {
-		if (dataSets.length > 1) {
-			dataSets.pop();
-		}
-	}
-
-	function updateData() {
-		dataSets = dataSets.map((data) => {
-			const newRandom = Math.random();
-			data[0].y.push(newRandom);
-			data[0].x.push(new Date());
-			if (data[0].x.length > max) {
-				data[0].x.shift();
-				data[0].y.shift();
-			}
-			return [...data];
-		});
-	}
-
-	onMount(() => {
-		setInterval(updateData, 500);
-	});
 </script>
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
+<svelte:head></svelte:head>
 
-<p1>Home</p1>
+<body>
+	<nav>
+		<div>Network management system</div>
+		<button on:click={toggleModal}>settings</button>
+	</nav>
 
-<button on:click={addPlot}>Add Plot</button>
-<button on:click={minusPlot}>Minus Plot</button>
-
-<div class="row">
-	{#each dataSets as data, i}
-		<div class="column">
-			<Plot {data} layout={{ width: 500, height: 400 }} />
+	{#if showModal}
+		<div class="modal">
+			<div class="center settings">
+				<!-- Settings page content goes here -->
+				<div class="settings-footer">
+					<!-- <button on:click={saveSettings}>Save</button> -->
+					<button on:click={toggleModal}>Close</button>
+				</div>
+			</div>
 		</div>
-	{/each}
-</div>
+	{/if}
+</body>
 
 <style>
-	.row {
+	nav {
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
+		justify-content: space-between;
+		border-bottom: 1pt solid var(--color-foreground);
+		margin: 10pt 0 20pt;
 	}
-	.column {
-		flex: 0 0 30%;
-		max-width: 30%;
-		margin-bottom: 20px;
+
+	.center {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.settings {
+		position: fixed;
+		top: 10%;
+		left: 25%;
+		width: 50%;
+		height: 80%;
+		background-color: var(--color-background);
+	}
+
+	.settings-footer {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
