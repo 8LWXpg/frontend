@@ -12,13 +12,13 @@ let settings = {
     mem: 0,
     bw: 0,
     dly: 0,
-    interval: 10000
 };
 
 async function timeOut() {
-    setTimeout(async () => {
+    setInterval(async () => {
         cpuWarning = await getTrigger();
-    }, settings.interval);
+        console.log(cpuWarning);
+    }, 1000);
 }
 
 export function load({ cookies }) {
@@ -35,13 +35,7 @@ export const actions = {
         settings.mem = Number(data.get('mem'));
         settings.bw = Number(data.get('bw'));
         settings.dly = Number(data.get('dly'));
-        settings.interval = Number(data.get('interval'));
         console.log(settings);
-        if (await getTrigger()) {
-            console.log("CPU is Not OK");
-        } else {
-            console.log("CPU is OK");
-        }
     }
 }
 
@@ -95,7 +89,7 @@ async function getTrigger(): Promise<boolean> {
         body: JSON.stringify(data),
     });
     const body = await response.then((res) => res.json());
-    return settings.cpu < Number(body.result[0].value)
+    return Number(body.result[0].value) < settings.cpu
 }
 
 timeOut();

@@ -20,11 +20,7 @@
 		<div class="center warning">CPU Warning</div>
 	{/if}
 
-	{#if data.cpuWarning}
-		<h1>{data.cpuWarning}</h1>
-	{:else}
-		<h1>{data.cpuWarning}</h1>
-	{/if}
+	<h1>{data.cpuWarning}</h1>
 
 	{#if showModal}
 		<div class="modal">
@@ -63,13 +59,6 @@
 						id="dly"
 						name="dly"
 						bind:value={tempSettings.dly}
-					/>
-					<label for="interval">Update Interval</label>
-					<input
-						type="number"
-						id="interval"
-						name="interval"
-						bind:value={tempSettings.interval}
 					/>
 					<div class="row">
 						<div class="column column-50">
