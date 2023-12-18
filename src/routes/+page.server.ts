@@ -1,3 +1,5 @@
+import { get } from "svelte/store";
+
 const url = 'http://localhost/zabbix/api_jsonrpc.php';
 const headers = {
     'Content-Type': 'application/json-rpc'
@@ -12,8 +14,8 @@ let settings = {
 };
 
 async function timeOut() {
-    setTimeout(() => {
-        getTrigger();
+    setTimeout(async () => {
+        cpuWarning = await getTrigger();
     }, 10000);
 }
 

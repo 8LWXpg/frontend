@@ -15,9 +15,9 @@
 		<button on:click={toggleModal}>settings</button>
 	</nav>
 	{#if data.cpuWarning}
-		<div class="center" style="color: var(--color-warning);">
-			CPU Warning
-		</div>
+		<h1>{data.cpuWarning}</h1>
+	{:else}
+		<h1>{data.cpuWarning}</h1>
 	{/if}
 
 	{#if showModal}
@@ -111,5 +111,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.warning {
+		color: red;
 	}
 </style>
