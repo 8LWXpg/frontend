@@ -10,6 +10,12 @@ let settings = {
     dly: 0,
 };
 
+export function load({ cookies }) {
+    return {
+        settings: settings
+    };
+}
+
 export const actions = {
     save: async ({ cookies, request }) => {
         const data = await request.formData();

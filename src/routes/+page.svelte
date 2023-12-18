@@ -1,25 +1,9 @@
 <script lang="ts">
+	export let data;
 	let showModal = false;
-	let cpu = 0;
-	let mem = 0;
-	let bw = 0;
-	let dly = 0;
-
-	let tempCpu = 0;
-	let tempMem = 0;
-	let tempBw = 0;
-	let tempDly = 0;
 
 	function toggleModal() {
 		showModal = !showModal;
-	}
-
-	function saveSettings() {
-		cpu = tempCpu;
-		mem = tempMem;
-		bw = tempBw;
-		dly = tempDly;
-		toggleModal();
 	}
 </script>
 
@@ -42,7 +26,7 @@
 						max="100"
 						id="cpu"
 						name="cpu"
-						bind:value={cpu}
+						bind:value={data.settings.cpu}
 					/>
 					<label for="mem">Memory Utilization Max</label>
 					<input
@@ -51,7 +35,7 @@
 						max="100"
 						id="mem"
 						name="mem"
-						bind:value={mem}
+						bind:value={data.settings.mem}
 					/>
 					<label for="bw">Bandwidth Utilization Max</label>
 					<input
@@ -60,10 +44,15 @@
 						max="100"
 						id="bw"
 						name="bw"
-						bind:value={bw}
+						bind:value={data.settings.bw}
 					/>
 					<label for="dly">ICMP Delay</label>
-					<input type="number" id="dly" name="dly" bind:value={dly} />
+					<input
+						type="number"
+						id="dly"
+						name="dly"
+						bind:value={data.settings.dly}
+					/>
 					<div class="row">
 						<div class="column column-50">
 							<button
