@@ -17,6 +17,7 @@ export const actions = {
         settings.mem = Number(data.get('mem'));
         settings.bw = Number(data.get('bw'));
         settings.dly = Number(data.get('dly'));
+        console.log(settings);
     }
 }
 

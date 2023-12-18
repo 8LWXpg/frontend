@@ -34,7 +34,7 @@
 	{#if showModal}
 		<div class="modal">
 			<div class="center settings">
-				<form method="post" action="?/save">
+				<form method="post" action="?/save" id="settings">
 					<label for="cpu">CPU Utilization Max</label>
 					<input
 						type="number"
@@ -42,6 +42,7 @@
 						max="100"
 						id="cpu"
 						name="cpu"
+						bind:value={cpu}
 					/>
 					<label for="mem">Memory Utilization Max</label>
 					<input
@@ -50,19 +51,29 @@
 						max="100"
 						id="mem"
 						name="mem"
+						bind:value={mem}
 					/>
 					<label for="bw">Bandwidth Utilization Max</label>
-					<input type="number" min="0" max="100" id="bw" name="bw" />
+					<input
+						type="number"
+						min="0"
+						max="100"
+						id="bw"
+						name="bw"
+						bind:value={bw}
+					/>
 					<label for="dly">ICMP Delay</label>
-					<input type="number" id="dly" name="dly" />
+					<input type="number" id="dly" name="dly" bind:value={dly} />
 					<div class="row">
 						<div class="column column-50">
-							<button on:click={toggleModal} style="width: 100%;"
-								>Cancel</button
+							<button
+								form="none"
+								on:click={toggleModal}
+								style="width: 100%;">Cancel</button
 							>
 						</div>
 						<div class="column column-50">
-							<button on:click={saveSettings} style="width: 100%;"
+							<button form="settings" style="width: 100%;"
 								>Save
 							</button>
 						</div>
