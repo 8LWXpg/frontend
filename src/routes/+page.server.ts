@@ -1,4 +1,4 @@
-import { get } from "svelte/store";
+import { redirect } from '@sveltejs/kit';
 
 const url = 'http://localhost/zabbix/api_jsonrpc.php';
 const headers = {
@@ -17,7 +17,7 @@ let settings = {
 async function timeOut() {
     setInterval(async () => {
         cpuWarning = await getTrigger();
-        console.log(cpuWarning);
+        // console.log(cpuWarning);
     }, 1000);
 }
 
@@ -36,6 +36,7 @@ export const actions = {
         settings.bw = Number(data.get('bw'));
         settings.dly = Number(data.get('dly'));
         console.log(settings);
+        throw redirect(302, '/');
     }
 }
 
@@ -89,7 +90,8 @@ async function getTrigger(): Promise<boolean> {
         body: JSON.stringify(data),
     });
     const body = await response.then((res) => res.json());
-    return Number(body.result[0].value) < settings.cpu
+    console.log(Number(body.result[0].value) > settings.cpu);
+    return Number(body.result[0].value) > settings.cpu
 }
 
 timeOut();

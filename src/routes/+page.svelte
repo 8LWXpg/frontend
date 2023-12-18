@@ -4,7 +4,6 @@
 	let tempSettings = { ...data.settings };
 
 	function toggleModal() {
-		tempSettings = { ...data.settings };
 		showModal = !showModal;
 	}
 </script>
@@ -16,11 +15,12 @@
 		<div>Network management system</div>
 		<button on:click={toggleModal}>settings</button>
 	</nav>
-	{#if data.cpuWarning}
-		<div class="center warning">CPU Warning</div>
-	{/if}
 
-	<h1>{data.cpuWarning}</h1>
+	{#if data.cpuWarning}
+		<h1 class="center warning">
+			CPU utilization is above {data.settings.cpu}%
+		</h1>
+	{/if}
 
 	{#if showModal}
 		<div class="modal">
