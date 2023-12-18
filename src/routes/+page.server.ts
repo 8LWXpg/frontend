@@ -2,6 +2,7 @@ const url = 'http://localhost/zabbix/api_jsonrpc.php';
 const headers = {
     'Content-Type': 'application/json-rpc'
 };
+
 let cpuWarning = false;
 
 let settings = {
