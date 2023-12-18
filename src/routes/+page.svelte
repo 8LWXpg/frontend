@@ -14,6 +14,11 @@
 		<div>Network management system</div>
 		<button on:click={toggleModal}>settings</button>
 	</nav>
+	{#if data.cpuWarning}
+		<div class="center" style="color: var(--color-warning);">
+			CPU Warning
+		</div>
+	{/if}
 
 	{#if showModal}
 		<div class="modal">

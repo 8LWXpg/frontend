@@ -2,6 +2,7 @@ const url = 'http://localhost/zabbix/api_jsonrpc.php';
 const headers = {
     'Content-Type': 'application/json-rpc'
 };
+let cpuWarning = false;
 
 let settings = {
     cpu: 0,
@@ -10,9 +11,16 @@ let settings = {
     dly: 0,
 };
 
+async function timeOut() {
+    setTimeout(() => {
+        getTrigger();
+    }, 10000);
+}
+
 export function load({ cookies }) {
     return {
-        settings: settings
+        settings: settings,
+        cpuWarning: cpuWarning
     };
 }
 
@@ -24,6 +32,11 @@ export const actions = {
         settings.bw = Number(data.get('bw'));
         settings.dly = Number(data.get('dly'));
         console.log(settings);
+        if (await getTrigger()) {
+            console.log("CPU is Not OK");
+        } else {
+            console.log("CPU is OK");
+        }
     }
 }
 
@@ -55,7 +68,7 @@ async function getToken(): Promise<string> {
         });
     });
 }
-async function getHistory() {
+async function getTrigger(): Promise<boolean> {
     const data = {
         jsonrpc: "2.0",
         method: "history.get",
@@ -77,5 +90,7 @@ async function getHistory() {
         body: JSON.stringify(data),
     });
     const body = await response.then((res) => res.json());
+    return settings.cpu < Number(body.result[0].value)
 }
-settings.cpu < Number(getHistory()) ? console.log('CPU is OK') : console.log('CPU is Not OK');
+
+timeOut();
