@@ -105,12 +105,6 @@
 		height: 80%;
 		background-color: var(--color-background);
 	}
-
-	.settings-footer {
-		display: flex;
-		justify-content: flex-end;
-	}
-
 	.modal {
 		position: fixed;
 		top: 0;
