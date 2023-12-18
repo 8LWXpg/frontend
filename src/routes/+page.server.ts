@@ -3,6 +3,23 @@ const headers = {
     'Content-Type': 'application/json-rpc'
 };
 
+let settings = {
+    cpu: 0,
+    mem: 0,
+    bw: 0,
+    dly: 0,
+};
+
+export const actions = {
+    save: async ({ cookies, request }) => {
+        const data = await request.formData();
+        settings.cpu = Number(data.get('cpu'));
+        settings.mem = Number(data.get('mem'));
+        settings.bw = Number(data.get('bw'));
+        settings.dly = Number(data.get('dly'));
+    }
+}
+
 async function getToken(): Promise<string> {
     const data = {
         jsonrpc: '2.0',
