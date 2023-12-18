@@ -72,4 +72,4 @@ async function getHistory() {
     });
     const body = await response.then((res) => res.json());
 }
-settings.cpu < Number(getHistory()) ? console.log('CPU is NOT OK') : console.log('CPU is OK');
+settings.cpu < Number(getHistory()) ? console.log('CPU is OK') : console.log('CPU is Not OK');
