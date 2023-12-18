@@ -68,9 +68,12 @@
 							>
 						</div>
 						<div class="column column-50">
-							<button on:click={saveSettings} style="width: 100%;"
-								>Save</button
+							<button
+								on:click={saveSettings}
+								style="width: 100%;"
 							>
+								Save
+							</button>
 						</div>
 					</div>
 				</form>
