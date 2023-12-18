@@ -1,5 +1,3 @@
-import type { P } from "vitest/dist/reporters-5f784f42.js";
-
 const url = 'http://localhost/zabbix/api_jsonrpc.php';
 const headers = {
     'Content-Type': 'application/json-rpc'
