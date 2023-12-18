@@ -61,8 +61,18 @@
 					/>
 					<label for="dly">ICMP Delay</label>
 					<input type="number" id="dly" bind:value={tempDly} />
-					<button on:click={toggleModal}>Cancel</button>
-					<button on:click={saveSettings}>Save</button>
+					<div class="row">
+						<div class="column column-50">
+							<button on:click={toggleModal} style="width: 100%;"
+								>Cancel</button
+							>
+						</div>
+						<div class="column column-50">
+							<button on:click={saveSettings} style="width: 100%;"
+								>Save</button
+							>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
