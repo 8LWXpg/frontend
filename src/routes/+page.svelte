@@ -1,10 +1,97 @@
 <script lang="ts">
-	export let data;
+	import { onMount } from "svelte";
+
+	let cpuWarning = false;
+	const url = "http://localhost/zabbix/api_jsonrpc.php";
+	const headers = {
+		"Content-Type": "application/json-rpc",
+	};
+
+	let settings = {
+		cpu: 0,
+		mem: 0,
+		bw: 0,
+		dly: 0,
+	};
+
 	let showModal = false;
-	let tempSettings = { ...data.settings };
+	let tempSettings = { ...settings };
 
 	function toggleModal() {
+		tempSettings = { ...settings };
+		console.log(settings);
 		showModal = !showModal;
+	}
+
+	function onSave() {
+		settings = { ...tempSettings };
+		console.log(settings);
+		toggleModal();
+	}
+
+	onMount(() => {
+		const interval = setInterval(async () => {
+			cpuWarning = await getTrigger();
+		}, 1000);
+		return () => clearInterval(interval);
+	});
+
+	async function getToken(): Promise<string> {
+		const data = {
+			jsonrpc: "2.0",
+			method: "user.login",
+			params: {
+				username: "Admin",
+				password: "zabbix",
+			},
+			id: 1,
+		};
+
+		return new Promise((resolve, reject) => {
+			fetch(url, {
+				method: "POST",
+				headers: headers,
+				body: JSON.stringify(data),
+			})
+				.then((res) => res.json())
+				.then((result) => {
+					if (result.result) {
+						resolve(result.result);
+					} else {
+						reject("No result found");
+					}
+				})
+				.catch((err) => {
+					console.error("Error:", err);
+					reject(err);
+				});
+		});
+	}
+
+	async function getTrigger(): Promise<boolean> {
+		const data = {
+			jsonrpc: "2.0",
+			method: "history.get",
+			params: {
+				output: "extend",
+				history: 0,
+				itemids: ["50093"],
+				sortfield: "clock",
+				sortorder: "DESC",
+				limit: 1,
+			},
+			auth: `${await getToken()}`,
+			id: 1,
+		};
+
+		const response = fetch(url, {
+			method: "POST",
+			headers: headers,
+			body: JSON.stringify(data),
+		});
+		const body = await response.then((res) => res.json());
+		console.log(Number(body.result[0].value) > settings.cpu);
+		return Number(body.result[0].value) > settings.cpu;
 	}
 </script>
 
@@ -16,9 +103,11 @@
 		<button on:click={toggleModal}>settings</button>
 	</nav>
 
-	{#if data.cpuWarning}
+	<h1>{cpuWarning}</h1>
+
+	{#if cpuWarning}
 		<h1 class="center warning">
-			CPU utilization is above {data.settings.cpu}%
+			CPU utilization is above {settings.cpu}%
 		</h1>
 	{/if}
 
@@ -69,7 +158,10 @@
 							>
 						</div>
 						<div class="column column-50">
-							<button form="settings" style="width: 100%;"
+							<button
+								form="settings"
+								style="width: 100%;"
+								on:click={onSave}
 								>Save
 							</button>
 						</div>
