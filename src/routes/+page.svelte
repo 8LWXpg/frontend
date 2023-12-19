@@ -25,7 +25,7 @@
 
 	function onSave() {
 		settings = { ...tempSettings };
-		console.log(settings);
+		getTrigger().then((res) => (cpuWarning = res));
 		toggleModal();
 	}
 
@@ -114,7 +114,7 @@
 	{#if showModal}
 		<div class="modal">
 			<div class="center settings">
-				<form method="post" action="?/save" id="settings">
+				<form id="settings">
 					<label for="cpu">CPU Utilization Max</label>
 					<input
 						type="number"
