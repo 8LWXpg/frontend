@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
+	// cpu warning flag
 	let cpuWarning = false;
 	const url = "http://localhost/zabbix/api_jsonrpc.php";
 	const headers = {
 		"Content-Type": "application/json-rpc",
 	};
 
+	// store settings
 	let settings = {
 		cpu: 0,
 		mem: 0,
@@ -14,7 +16,9 @@
 		dly: 0,
 	};
 
+	// settings page overlay modal
 	let showModal = false;
+	// temp settings for cancel
 	let tempSettings = { ...settings };
 
 	function toggleModal() {
@@ -29,6 +33,7 @@
 		toggleModal();
 	}
 
+	// get trigger every second
 	onMount(() => {
 		const interval = setInterval(async () => {
 			cpuWarning = await getTrigger();
@@ -36,6 +41,7 @@
 		return () => clearInterval(interval);
 	});
 
+	// get token for zabbix api
 	async function getToken(): Promise<string> {
 		const data = {
 			jsonrpc: "2.0",
@@ -68,6 +74,7 @@
 		});
 	}
 
+	// get value then calculate if trigger should be set
 	async function getTrigger(): Promise<boolean> {
 		const data = {
 			jsonrpc: "2.0",
@@ -105,12 +112,14 @@
 
 	<!-- <h1>{cpuWarning}</h1> -->
 
+	<!-- warning badge -->
 	{#if cpuWarning}
 		<p class="notification is-danger">
 			Warning: CPU utilization is above {settings.cpu}%
 		</p>
 	{/if}
 
+	<!-- settings page overlay -->
 	{#if showModal}
 		<div class="modal">
 			<div class="center settings">
