@@ -25,7 +25,7 @@
 
 	function onSave() {
 		settings = { ...tempSettings };
-		getTrigger().then((res) => (cpuWarning = res));
+		// getTrigger().then((res) => (cpuWarning = res));
 		toggleModal();
 	}
 
@@ -99,16 +99,16 @@
 
 <body>
 	<nav>
-		<div>Network management system</div>
+		<div>View Problems</div>
 		<button on:click={toggleModal}>settings</button>
 	</nav>
 
-	<h1>{cpuWarning}</h1>
+	<!-- <h1>{cpuWarning}</h1> -->
 
 	{#if cpuWarning}
-		<h1 class="center warning">
-			CPU utilization is above {settings.cpu}%
-		</h1>
+		<p class="notification is-danger">
+			Warning: CPU utilization is above {settings.cpu}%
+		</p>
 	{/if}
 
 	{#if showModal}
