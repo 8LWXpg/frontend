@@ -82,7 +82,7 @@
 <div class="layout">
 	<aside class="layout__aside">
 		<div class="logo">
-			<h1>AI Database Assistant</h1>
+			<h1>AI School Information Manager</h1>
 		</div>
 
 		<a
